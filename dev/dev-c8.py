@@ -2,9 +2,10 @@ import time
 import serial
 import io
 
+
 sync_bit = b'\xc8'
 
-with serial.Serial('/dev/ttyUSB1', 420000, timeout=1) as ser:
+with serial.Serial('/dev/ttyUSB0', 115200, timeout=1) as ser:
     print('starting to read')
     
     while True:
