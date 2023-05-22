@@ -323,9 +323,9 @@ uint8_t adjustPacketRateForBaud(uint8_t rateIndex)
     {
       rateIndex = get_elrs_HandsetRate_max(rateIndex, 6666);
     }
-    else if (crsf.GetCurrentBaudRate() == 115200) // Packet rate limited to 250Hz if we are on 115k baud (on internal module)
+    else if (crsf.GetCurrentBaudRate() == 115200) // Limit to 150hz/115200 regardless if internal or external TX
     {
-      rateIndex = get_elrs_HandsetRate_max(rateIndex, 4000);
+      rateIndex = get_elrs_HandsetRate_max(rateIndex, 6666); // changed from 4000 to 6666 to run 115s00 on USB with split rx/tx pins
     }
     else if (crsf.GetCurrentBaudRate() == 400000) // Packet rate limited to 500Hz if we are on 400k baud
     {
