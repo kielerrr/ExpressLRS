@@ -9,11 +9,11 @@ from crsf_parser.handling import crsf_build_frame
 import time
 
 
-interval = 0.004
+interval = 0.015
 # interval = 0.00
 next_call = time.time()
 long_call = time.time()
-bit_cycle = [b'\x01',b'\x02',b'\x03',b'\x04',b'\x05',b'\x06',b'\x07',b'\x08',b'\x09',b'\x0a',b'\x0b',b'\x0c',b'\x0d',b'\x0e',b'\x0f']
+# bit_cycle = [b'\x01',b'\x02',b'\x03',b'\x04',b'\x05',b'\x06',b'\x07',b'\x08',b'\x09',b'\x0a',b'\x0b',b'\x0c',b'\x0d',b'\x0e',b'\x0f']
 # bit_cycle = [b'\x00',b'\x00',b'\x00',b'\x01',b'\x02',b'\x04',b'\x08',b'\x10',b'\x20',b'\x40',b'\x80',b'\xff',b'\xff',b'\xff',b'\x00',b'\x00',b'\x00']
 # bit_cycle = [b'\x00',b'\xfa',b'\xfb',b'\xfc',b'\xfd',b'\xfe',b'\xff']
 array_pointer = 0
