@@ -91,9 +91,11 @@ class Hla(HighLevelAnalyzer):
             print('Sync byte detected.')
             self.crsf_frame_start = frame.start_time
             self.dec_fsm = self.dec_fsm_e.Length
-            print('crsf_sync_byte', self.dec_fsm)
-            return AnalyzerFrame('crsf_sync_byte', frame.start_time, frame.end_time, {})
-
+            try:
+                print('crsf_sync_byte', self.dec_fsm)
+                return AnalyzerFrame('crsf_sync_byte', frame.start_time, frame.end_time, {})
+            except:
+                print('new frame broke')
         # Length if its a length frame do this
         if self.dec_fsm == self.dec_fsm_e.Length:
             payload = int.from_bytes(frame.data['data'], byteorder='little')
@@ -102,9 +104,13 @@ class Hla(HighLevelAnalyzer):
             self.crsf_frame_length = payload
             self.dec_fsm = self.dec_fsm_e.Type
             print('length frame', payload)
-            return AnalyzerFrame('crsf_length_byte', frame.start_time, frame.end_time, {
-                'length': str(payload - 1)
-            })
+            try:
+                return AnalyzerFrame('crsf_length_byte', frame.start_time, frame.end_time, {
+                    'length': str(payload - 1)
+                })
+            except:
+                print("length broke")
+
 
         # Type if its a type frame do this
         if self.dec_fsm == self.dec_fsm_e.Type:
@@ -196,6 +202,7 @@ class Hla(HighLevelAnalyzer):
                         bin_str += format(i, '08b')[::-1]  # Format as bits and reverse order
                     print(bin_str)
                     for i in range(16):
+                        # print(bin_str)
                         value = int(bin_str[0 + 11 * i : 11 + 11 * i][::-1], 2)  # 'RC' value
                         value_ms = int((value * 1024 / 1639) + 881)  # Converted to milliseconds
                         channels.append(value)
